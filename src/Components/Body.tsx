@@ -1,6 +1,6 @@
 import React from "react"
 import LoginBlock from "./LoginBlock"
-import { AppState } from "../App";
+import { AppState } from './Interface';
 
 const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>,authenticationDetails:AppState["authenticationDetails"],changeAuthenticationDetails:AppState["changeAuthenticationDetails"]}) =>  {
 

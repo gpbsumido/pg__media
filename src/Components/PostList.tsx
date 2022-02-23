@@ -1,11 +1,11 @@
 import React,{useState} from "react";
-import { AppState } from "../App";
+import { AppState } from './Interface';
 
 const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePosts"]}) => {
 
     //initialize latest post to be added
     const [postInput,setInput] = useState({
-        postID:"",
+        title:"",
         imgurl:"",
         liked:false,
         descr:"",
@@ -25,12 +25,18 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
         props.setPosts([
             ...props.posts,
             {
-                postID: postInput.postID,
+                title: postInput.title,
                 imgurl: postInput.imgurl,
                 liked: postInput.liked,
                 descr: postInput.descr
             }
         ])
+        setInput({
+            title:"",
+            imgurl:"",
+            liked:false,
+            descr:""
+        })
     }
 
     //handler for clearing list of posts in App state
@@ -41,13 +47,14 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
 
     return(
         <div>
+            <h1>Posts</h1>
             {/*unordered list of posts, taken from App state*/}
             <ul>
                 {props.posts.map(post => {
                     return (
                         <div>
                             <h3>
-                                {post.postID}
+                                {post.title}
                             </h3>
                             <img src={post.imgurl} alt="post"/>
                             <h4>
@@ -61,9 +68,9 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
             <div>
                 <input
                     type="text"
-                    name="postID"
-                    placeholder="PostID"
-                    value={postInput.postID}
+                    name="title"
+                    placeholder="title"
+                    value={postInput.title}
                     onChange={(onChangeHandler)}
                 />
                 <input

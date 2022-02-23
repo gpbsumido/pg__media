@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import { AppState } from "../App";
+import { AppState } from './Interface';
 
 function LoginBlock(props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>,authenticationDetails:AppState["authenticationDetails"],changeAuthenticationDetails:AppState["changeAuthenticationDetails"]}) {
 
