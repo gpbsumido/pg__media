@@ -1,24 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Body from './Components/Body'
+import PostList from './Components/PostList';
+
+//interface for post
+export interface AppState {
+  posts : {
+      postID: string,
+      imgurl: string,
+      liked: boolean,
+      descr: string
+  }[],
+  updatePosts: React.Dispatch<React.SetStateAction<{
+    postID: string;
+    imgurl: string;
+    liked: boolean;
+    descr: string;
+  }[]>>
+}
 
 function App() {
+
+  //state for whether user is logged in
+  const [isLoggedIn,changeAuthentication] = useState<boolean>(false)
+
+  //function to change logged in status
+  const changeStatus = (status:React.SetStateAction<boolean>) => {
+    changeAuthentication(!status)
+  }
+  //state for keeping track of posts
+  const [posts,updatePosts] = useState<AppState["posts"]>([{
+    postID:"100",
+    imgurl:"",
+    liked:false,
+    descr:"First Post",
+  }])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {/*Body component, different prompts based on authentication status*/}
+      <Body logInStatus = {isLoggedIn} changeStatus = {changeStatus}/>
+
+      {/*conditional, if logged in, show posts, otherwise don't show posts*/}
+      {
+        isLoggedIn 
+          ? <PostList posts = {posts} setPosts = {updatePosts} /> 
+          : <div></div>
+      }
+
     </div>
   );
 }
