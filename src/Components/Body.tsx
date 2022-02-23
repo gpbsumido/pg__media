@@ -1,6 +1,8 @@
 import React from "react"
+import LoginBlock from "./LoginBlock"
+import { AppState } from "../App";
 
-function Body(props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>})  {
+const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>,authenticationDetails:AppState["authenticationDetails"],changeAuthenticationDetails:AppState["changeAuthenticationDetails"]}) =>  {
 
     //usestate from App is passed down and used as click handler for login/logout button
     const onClickHandler = () => {
@@ -22,9 +24,7 @@ function Body(props: {logInStatus:boolean,changeStatus: React.Dispatch<React.Set
         return (
             <div>
                 <h1>Please log in!</h1>
-                <button onClick={onClickHandler}>
-                    Log In
-                </button>
+                <LoginBlock logInStatus = {props.logInStatus} changeStatus = {props.changeStatus}  authenticationDetails={props.authenticationDetails} changeAuthenticationDetails={props.changeAuthenticationDetails}/>
             </div>
         )
     }

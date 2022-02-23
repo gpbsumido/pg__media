@@ -28,7 +28,6 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
                 descr: postInput.descr
             }
         ])
-
     }
     const onClickHandlerClear = () => {
         props.setPosts([])

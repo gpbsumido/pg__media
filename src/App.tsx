@@ -16,13 +16,27 @@ export interface AppState {
     imgurl: string;
     liked: boolean;
     descr: string;
-  }[]>>
+  }[]>>,
+  authenticationDetails: {
+    username: string,
+    password: string
+  }
+  changeAuthenticationDetails:React.Dispatch<React.SetStateAction<{
+    username: string;
+    password: string;
+}>>
 }
 
 function App() {
 
   //state for whether user is logged in
   const [isLoggedIn,changeAuthentication] = useState<boolean>(false)
+
+  //state for whether user is logged in
+  const [authenticationDetails,changeAuthenticationDetails] = useState<AppState["authenticationDetails"]>({
+    username:"",
+    password:""
+  })
 
   //state for keeping track of posts
   const [posts,updatePosts] = useState<AppState["posts"]>([{
@@ -36,15 +50,14 @@ function App() {
   return (
     <div className="App">
 
-      {/*Body component, different prompts based on authentication status*/}
-      <Body logInStatus = {isLoggedIn} changeStatus = {changeAuthentication}/>
-
       {/*conditional, if logged in, show posts, otherwise don't show posts*/}
       {
         isLoggedIn 
           ? <PostList posts = {posts} setPosts = {updatePosts} /> 
           : <div></div>
       }
+      {/*Body component, different prompts based on authentication status*/}
+      <Body logInStatus = {isLoggedIn} changeStatus = {changeAuthentication} authenticationDetails={authenticationDetails} changeAuthenticationDetails={changeAuthenticationDetails}/>
 
     </div>
   );
