@@ -20,7 +20,7 @@ const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.Set
             </div>
         )
     } else {
-        //if not logged in, return prompt to log in and a log in button
+        //if not logged in, return prompt to log in and a log in block
         return (
             <div>
                 <h1>Please log in!</h1>

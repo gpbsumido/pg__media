@@ -3,6 +3,7 @@ import { AppState } from "../App";
 
 const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePosts"]}) => {
 
+    //initialize latest post to be added
     const [postInput,setInput] = useState({
         postID:"",
         imgurl:"",
@@ -10,6 +11,7 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
         descr:"",
     })
 
+    //change handler for inputs for details of latest post to be added
     const onChangeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
        setInput({
         ...postInput,
@@ -18,6 +20,7 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
        )
     }
 
+    //handler to add latest post to list of posts in App State
     const onClickHandlerSave = () => {
         props.setPosts([
             ...props.posts,
@@ -29,6 +32,8 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
             }
         ])
     }
+
+    //handler for clearing list of posts in App state
     const onClickHandlerClear = () => {
         props.setPosts([])
 
@@ -36,6 +41,7 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
 
     return(
         <div>
+            {/*unordered list of posts, taken from App state*/}
             <ul>
                 {props.posts.map(post => {
                     return (
@@ -51,38 +57,41 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
                     )
                 })}
             </ul>
+            {/* inputs for latest post */}
             <div>
                 <input
-                type="text"
-                name="postID"
-                placeholder="PostID"
-                value={postInput.postID}
-                onChange={(onChangeHandler)}
+                    type="text"
+                    name="postID"
+                    placeholder="PostID"
+                    value={postInput.postID}
+                    onChange={(onChangeHandler)}
                 />
                 <input
-                type="text"
-                name="imgurl"
-                placeholder="URL"
-                value={postInput.imgurl}
-                onChange={onChangeHandler}
+                    type="text"
+                    name="imgurl"
+                    placeholder="URL"
+                    value={postInput.imgurl}
+                    onChange={onChangeHandler}
                 />
                 <input
-                type="textArea"
-                name="descr"
-                placeholder="Description"
-                value={postInput.descr}
-                onChange={onChangeHandler}
+                    type="textArea"
+                    name="descr"
+                    placeholder="Description"
+                    value={postInput.descr}
+                    onChange={onChangeHandler}
                 />
             </div>
+            {/*button for saving latest post to list in App state*/}
             <button
-            onClick={onClickHandlerSave}
-            name="savePost"
+                onClick={onClickHandlerSave}
+                name="savePost"
             >
                 Save Post
             </button>
+            {/*button for clearing App state post list*/}
             <button
-            onClick={onClickHandlerClear}
-            name="clearPosts"
+                onClick={onClickHandlerClear}
+                name="clearPosts"
             >
                 Clear All Posts
             </button>
