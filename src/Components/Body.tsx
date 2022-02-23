@@ -2,19 +2,17 @@ import React from "react"
 
 function Body(props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>})  {
 
-    //handler from App is passed down and used as click handler for login/logout button
+    //usestate from App is passed down and used as click handler for login/logout button
     const onClickHandler = () => {
-        props.changeStatus(props.logInStatus)
+        props.changeStatus(!props.logInStatus)
     }
 
-    //chack to see if logged in or not
+    //check to see if logged in or not
     if (props.logInStatus) {
         //if logged in, return a button to logout
         return (
             <div>
-                <button
-                    onClick={onClickHandler}
-                >
+                <button onClick={onClickHandler} >
                     Logout
                 </button>
             </div>

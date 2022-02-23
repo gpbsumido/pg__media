@@ -24,10 +24,6 @@ function App() {
   //state for whether user is logged in
   const [isLoggedIn,changeAuthentication] = useState<boolean>(false)
 
-  //function to change logged in status
-  const changeStatus = (status:React.SetStateAction<boolean>) => {
-    changeAuthentication(!status)
-  }
   //state for keeping track of posts
   const [posts,updatePosts] = useState<AppState["posts"]>([{
     postID:"100",
@@ -41,7 +37,7 @@ function App() {
     <div className="App">
 
       {/*Body component, different prompts based on authentication status*/}
-      <Body logInStatus = {isLoggedIn} changeStatus = {changeStatus}/>
+      <Body logInStatus = {isLoggedIn} changeStatus = {changeAuthentication}/>
 
       {/*conditional, if logged in, show posts, otherwise don't show posts*/}
       {
