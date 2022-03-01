@@ -53,13 +53,9 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
                 {props.posts.map(post => {
                     return (
                         <div>
-                            <h3>
-                                {post.title}
-                            </h3>
+                            <h3> {post.title} </h3>
                             <img src={post.imgurl} alt="post"/>
-                            <h4>
-                                {post.descr}
-                            </h4>
+                            <h4> {post.descr} </h4>
                         </div>
                     )
                 })}

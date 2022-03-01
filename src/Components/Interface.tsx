@@ -7,7 +7,7 @@ export interface AppState {
         liked: boolean,
         descr: string
     }[],
-    updatePosts: React.Dispatch<React.SetStateAction<{
+    updatePosts: React.Dispatch<React.SetStateAction<{ 
       title: string;
       imgurl: string;
       liked: boolean;

@@ -14,7 +14,9 @@ const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.Set
         //if logged in, return a button to logout
         return (
             <div>
-                <button onClick={onClickHandler} >
+                <button 
+                    onClick={onClickHandler} 
+                >
                     Logout
                 </button>
             </div>
@@ -24,7 +26,12 @@ const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.Set
         return (
             <div>
                 <h1>Please log in!</h1>
-                <LoginBlock logInStatus = {props.logInStatus} changeStatus = {props.changeStatus}  authenticationDetails={props.authenticationDetails} changeAuthenticationDetails={props.changeAuthenticationDetails}/>
+                <LoginBlock 
+                    logInStatus = {props.logInStatus} 
+                    changeStatus = {props.changeStatus}  
+                    authenticationDetails={props.authenticationDetails} 
+                    changeAuthenticationDetails={props.changeAuthenticationDetails}
+                />
             </div>
         )
     }
