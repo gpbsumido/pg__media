@@ -61,10 +61,12 @@ const PostList = ({
                 <ul>
                     {posts.map(post => {
                         return (
-                            <div className="flex flex-col my-3">
-                                <h3 className="flex justify-center"> {post.title} </h3>
-                                <img className="flex justify-center" src={post.imgurl} alt="post"/>
-                                <h4 className="flex justify-center"> {post.descr} </h4>
+                            <div className="flex flex-col my-3 w-full">
+                                <h3 className="flex justify-center w-full"> {post.title} </h3>
+                                <div className="flex justify-center my-2 min-h-20">
+                                    <img src={post.imgurl} alt="post"/>
+                                </div>
+                                <h4 className="flex justify-center w-full"> {post.descr} </h4>
                             </div>
                         )
                     })}

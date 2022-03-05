@@ -48,7 +48,6 @@ function LoginBlock({
         }
     }
 
-
     if (!logInStatus) {
         return (
             <div className='flex flex-col w-full justify-center my-5'>
@@ -68,6 +67,18 @@ function LoginBlock({
                         name='password'
                         placeholder='Password'
                         onChange={onChangeHandler}
+                        onKeyUp={(e) => {
+                            if (e.key === 'Enter') {
+                                if (loginDetails.username === 'Paul' && loginDetails.password === 'Karen') {
+                                    changeAuthenticationDetails({
+                                        username: loginDetails.username,
+                                        password: loginDetails.password
+                                    })
+                                    //change login status for App state
+                                    changeStatus(!logInStatus)
+                                }
+                            }
+                        }}
                         value={loginDetails.password}
                         className='text-left w-1/4 rounded-lg py-1 px-2 border-2'
                     />
@@ -90,8 +101,6 @@ function LoginBlock({
             </div>
         )
     }
-
-    
 }
 
 export default LoginBlock
