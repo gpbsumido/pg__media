@@ -36,15 +36,25 @@ function LoginBlock({
 
     //usestate from App is passed down and used as click handler for login/logout button
     const onClickHandler = () => {
+        if (logInStatus === false) {
         //check if authentication details are valid
-        if(loginDetails.username === 'Paul' && loginDetails.password === 'Karen') {
-            //change the authentication details for state in App for future use if needed
+            if(loginDetails.username === 'Paul' && loginDetails.password === 'Karen') {
+                //change the authentication details for state in App for future use if needed
+                changeAuthenticationDetails({
+                    username: loginDetails.username,
+                    password: loginDetails.password
+                })
+                //change login status for App state
+                changeStatus(true)
+            }
+        } else {
+            //clear authentication details
             changeAuthenticationDetails({
-                username: loginDetails.username,
-                password: loginDetails.password
+                username: '',
+                password: ''
             })
             //change login status for App state
-            changeStatus(!logInStatus)
+            changeStatus(false)
         }
     }
 
