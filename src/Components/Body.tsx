@@ -1,40 +1,23 @@
-import React from "react"
-import LoginBlock from "./LoginBlock"
+import { useState } from 'react';
 import { AppState } from './Interface';
+import PostList from "./PostList";
 
-const Body = (props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>,authenticationDetails:AppState["authenticationDetails"],changeAuthenticationDetails:AppState["changeAuthenticationDetails"]}) =>  {
+const Body = () =>  {
 
-    //usestate from App is passed down and used as click handler for login/logout button
-    const onClickHandler = () => {
-        props.changeStatus(!props.logInStatus)
-    }
-
-    //check to see if logged in or not
-    if (props.logInStatus) {
-        //if logged in, return a button to logout
-        return (
-            <div>
-                <button 
-                    onClick={onClickHandler} 
-                >
-                    Logout
-                </button>
-            </div>
-        )
-    } else {
-        //if not logged in, return prompt to log in and a log in block
-        return (
-            <div>
-                <h1>Please log in!</h1>
-                <LoginBlock 
-                    logInStatus = {props.logInStatus} 
-                    changeStatus = {props.changeStatus}  
-                    authenticationDetails={props.authenticationDetails} 
-                    changeAuthenticationDetails={props.changeAuthenticationDetails}
-                />
-            </div>
-        )
-    }
+    //state for keeping track of posts
+    const [posts,updatePosts] = useState<AppState["posts"]>([{
+        title:"Tim Duncan",
+        imgurl:"https://d1l5jyrrh5eluf.cloudfront.net/wp-content/uploads/2018/05/duncan1.jpg",
+        liked:false,
+        descr:"Goat",
+    }])
+    
+    return (
+        <div className='flex flex-col justify-center w-full'>
+            <PostList posts = {posts} setPosts = {updatePosts} /> 
+        </div>
+    )
+    
 }
 
 export default Body

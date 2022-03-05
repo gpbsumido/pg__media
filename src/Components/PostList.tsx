@@ -1,7 +1,13 @@
 import React,{useState} from "react";
 import { AppState } from './Interface';
 
-const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePosts"]}) => {
+const PostList = ({
+    posts,
+    setPosts,
+}:{
+    posts: AppState["posts"],
+    setPosts: AppState["updatePosts"] 
+}) => {
 
     //initialize latest post to be added
     const [postInput,setInput] = useState({
@@ -22,8 +28,8 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
 
     //handler to add latest post to list of posts in App State
     const onClickHandlerSave = () => {
-        props.setPosts([
-            ...props.posts,
+        setPosts([
+            ...posts,
             {
                 title: postInput.title,
                 imgurl: postInput.imgurl,
@@ -41,27 +47,31 @@ const PostList = (props: {posts: AppState["posts"],setPosts: AppState["updatePos
 
     //handler for clearing list of posts in App state
     const onClickHandlerClear = () => {
-        props.setPosts([])
+        setPosts([])
 
     }
 
     return(
-        <div>
-            <h1>Posts</h1>
-            {/*unordered list of posts, taken from App state*/}
-            <ul>
-                {props.posts.map(post => {
-                    return (
-                        <div>
-                            <h3> {post.title} </h3>
-                            <img src={post.imgurl} alt="post"/>
-                            <h4> {post.descr} </h4>
-                        </div>
-                    )
-                })}
-            </ul>
+        <div className="flex flex-col">
+            <div className="w-full flex justify-center">
+                <h1 className="">Posts</h1>
+            </div>
+            <div className="w-full flex justify-center">
+                {/*unordered list of posts, taken from App state*/}
+                <ul>
+                    {posts.map(post => {
+                        return (
+                            <div className="flex flex-col my-3">
+                                <h3 className="flex justify-center"> {post.title} </h3>
+                                <img className="flex justify-center" src={post.imgurl} alt="post"/>
+                                <h4 className="flex justify-center"> {post.descr} </h4>
+                            </div>
+                        )
+                    })}
+                </ul>
+            </div>
             {/* inputs for latest post */}
-            <div>
+            <div className="w-full flex justify-center">
                 <input
                     type="text"
                     name="title"

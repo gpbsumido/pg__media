@@ -1,7 +1,17 @@
 import React ,{useState} from 'react'
 import { AppState } from './Interface';
 
-function LoginBlock(props: {logInStatus:boolean,changeStatus: React.Dispatch<React.SetStateAction<boolean>>,authenticationDetails:AppState["authenticationDetails"],changeAuthenticationDetails:AppState["changeAuthenticationDetails"]}) {
+function LoginBlock({
+    logInStatus,
+    changeStatus,
+    authenticationDetails,
+    changeAuthenticationDetails,
+}:{
+    logInStatus:boolean,
+    changeStatus: React.Dispatch<React.SetStateAction<boolean>>,
+    authenticationDetails:AppState["authenticationDetails"],
+    changeAuthenticationDetails:AppState["changeAuthenticationDetails"]
+}) {
 
     //initializing login details
     const [loginDetails, setLoginDetails] = useState({
@@ -29,39 +39,59 @@ function LoginBlock(props: {logInStatus:boolean,changeStatus: React.Dispatch<Rea
         //check if authentication details are valid
         if(loginDetails.username === 'Paul' && loginDetails.password === 'Karen') {
             //change the authentication details for state in App for future use if needed
-            props.changeAuthenticationDetails({
+            changeAuthenticationDetails({
                 username: loginDetails.username,
                 password: loginDetails.password
             })
             //change login status for App state
-            props.changeStatus(!props.logInStatus)
+            changeStatus(!logInStatus)
         }
     }
 
-  return (
-    <div>
-        {/*username input*/}
-        <input
-            type='text'
-            name='username'
-            placeholder='Username'
-            onChange={onChangeHandler}
-            value={loginDetails.username}
-        />
-        {/*password input*/}
-        <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            onChange={onChangeHandler}
-            value={loginDetails.password}
-        />
-        {/*button to start the authetication details check*/}
-        <button onClick={onClickHandler}>
-            Log In
-        </button>
-    </div>
-  )
+
+    if (!logInStatus) {
+        return (
+            <div className='flex flex-col w-full justify-center my-5'>
+                <div className='w-full flex justify-center m-1'>
+                    <input
+                        type='text'
+                        name='username'
+                        placeholder='Username'
+                        onChange={onChangeHandler}
+                        value={loginDetails.username}
+                        className='text-left w-1/4 rounded-lg py-1 px-2 border-2'
+                    />
+                </div>
+                <div className='w-full flex justify-center m-1'>
+                    <input
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        onChange={onChangeHandler}
+                        value={loginDetails.password}
+                        className='text-left w-1/4 rounded-lg py-1 px-2 border-2'
+                    />
+                </div>
+                <div className='w-full flex justify-center my-2'>
+                    {/*button to start the authetication details check*/}
+                    <button onClick={onClickHandler} className='text-yellow-400 bg-black rounded-lg py-1 px-2'>
+                        Log In
+                    </button>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className='w-full flex justify-center'>
+                {/*button to start the authetication details check*/}
+                <button onClick={onClickHandler} className='text-yellow-400'>
+                    Log Out
+                </button>
+            </div>
+        )
+    }
+
+    
 }
 
 export default LoginBlock

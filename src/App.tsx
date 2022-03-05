@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './App.css';
 import Body from './Components/Body'
 import PostList from './Components/PostList';
 import { AppState } from './Components/Interface';
+import LoginBlock from './Components/LoginBlock';
 
 function App() {
 
@@ -24,17 +24,17 @@ function App() {
   }])
 
   return (
-    <div className="App">
-      {/*conditional, if logged in, show posts, otherwise don't show posts*/}
+    <div className="App className='place-content-end max-h-max max-w-max'">
+      {/*ternary, if logged in, show posts, otherwise don't show posts*/}
       {
-        isLoggedIn 
-          ? <PostList posts = {posts} setPosts = {updatePosts} /> 
-          : <div></div>
+        isLoggedIn && 
+          <div className='flex flex-col justify-center w-full'>
+            <PostList posts = {posts} setPosts = {updatePosts} /> 
+          </div>
       }
-      {/*Body component, different prompts based on authentication status*/}
-      <Body 
+      <LoginBlock 
         logInStatus = {isLoggedIn} 
-        changeStatus = {changeAuthentication} 
+        changeStatus = {changeAuthentication}  
         authenticationDetails={authenticationDetails} 
         changeAuthenticationDetails={changeAuthenticationDetails}
       />
